@@ -1,0 +1,47 @@
+spring:
+  application:
+    name: representa-brasil
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=15m
+
+server:
+  port: 8080
+
+representa:
+  cors:
+    allowed-origins: http://localhost:4200
+  http:
+    connect-timeout: 5s
+    read-timeout: 20s
+    user-agent: RepresentaBrasil/0.1 (+https://github.com/giunei/representa-brasil)
+  election:
+    year: 2022
+    id: 2030602022
+  integration:
+    tse:
+      base-url: https://divulgacandcontas.tse.jus.br/divulga/rest/v1
+    camara:
+      base-url: https://dadosabertos.camara.leg.br/api/v2
+    senado:
+      base-url: https://legis.senado.leg.br/dadosabertos
+    planalto:
+      enabled: false
+  ai:
+    enabled: false
+    base-url: http://localhost:11434
+    model: qwen3:4b
+    timeout: 60s
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operations-sorter: method
+
+logging:
+  level:
+    giunei.representa_brasil: INFO
+    giunei.representa_brasil.integration: DEBUG
